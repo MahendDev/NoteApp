@@ -29,6 +29,38 @@ function App() {
         }
     }, [notes]);
 
+    // Handle deep links/shortcuts
+    useEffect(() => {
+        const handleShortcut = (event) => {
+            try {
+                // Parse the data from the event
+                const data = typeof event.detail === 'string' ? JSON.parse(event.detail) : event.detail;
+                const noteId = data.noteId;
+
+                if (noteId) {
+                    const allNotes = getNotes();
+                    const targetNote = allNotes.find(n => n.id === noteId);
+                    if (targetNote) {
+                        // Small delay to ensure state is ready
+                        setTimeout(() => {
+                            setViewingNote(targetNote);
+                            setIsEditing(false);
+                            setCurrentNote(null);
+                        }, 100);
+                    }
+                }
+            } catch (error) {
+                console.error('Failed to handle shortcut:', error);
+            }
+        };
+
+        window.addEventListener('noteShortcutOpened', handleShortcut);
+
+        return () => {
+            window.removeEventListener('noteShortcutOpened', handleShortcut);
+        };
+    }, []);
+
     const handleAddNote = () => {
         setCurrentNote(null);
         setViewingNote(null);
