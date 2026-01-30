@@ -1,0 +1,113 @@
+:root {
+    /* Theme: Sakura (Default) */
+    --bg-app: #FFF0F5;
+    /* Lavender Blush */
+    --bg-card: #FFFFFF;
+    --text-main: #6D546F;
+    --text-muted: #9E8FA0;
+    --primary: #FFB7B2;
+    /* Melon */
+    --secondary: #FFDAC1;
+    /* Peach */
+    --accent: #E2F0CB;
+    /* Tea Green */
+
+    --shadow-sm: 0 4px 6px rgba(109, 84, 111, 0.05);
+    --shadow-md: 0 8px 15px rgba(109, 84, 111, 0.1);
+    --radius-lg: 20px;
+    --radius-md: 12px;
+
+    --font-body: 'Quicksand', sans-serif;
+}
+
+.theme-pink {
+    --bg-app: #FFF5F7;
+    --bg-card: #FFFFFF;
+    --text-main: #594A4E;
+    --text-muted: #9C898D;
+    --primary: #FF8FA3;
+    --secondary: #FFC2D1;
+    --accent: #FFE4E1;
+}
+
+.theme-mint {
+    --bg-app: #F0FFF4;
+    --bg-card: #FFFFFF;
+    --text-main: #2F4F4F;
+    --text-muted: #8FBC8F;
+    --primary: #68D391;
+    --secondary: #9AE6B4;
+    --accent: #E6FFFA;
+}
+
+.theme-peach {
+    --bg-app: #FFF8F0;
+    --bg-card: #FFFFFF;
+    --text-main: #8B4513;
+    --text-muted: #CD853F;
+    --primary: #FFB347;
+    --secondary: #FFDAB9;
+    --accent: #FFF5EE;
+}
+
+.theme-sky {
+    --bg-app: #F0F8FF;
+    --bg-card: #FFFFFF;
+    --text-main: #4682B4;
+    --text-muted: #87CEEB;
+    --primary: #87CEFA;
+    --secondary: #B0E0E6;
+    --accent: #F0FFFF;
+}
+
+.theme-lemon {
+    --bg-app: #FFFFF0;
+    --bg-card: #FFFFFF;
+    --text-main: #808000;
+    --text-muted: #BDB76B;
+    --primary: #F0E68C;
+    --secondary: #FFFACD;
+    --accent: #FFFFE0;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    font-family: var(--font-body);
+    background-color: #f0f0f0;
+    /* Desktop background */
+    color: var(--text-main);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* Center on desktop */
+    min-height: 100vh;
+}
+
+#root {
+    width: 100%;
+    max-width: 480px;
+    /* Mobile frame */
+    background-color: var(--bg-app);
+    min-height: 100vh;
+    box-shadow: 0 0 40px rgba(0, 0, 0, 0.1);
+    position: relative;
+    overflow-x: hidden;
+}
+
+button {
+    font-family: var(--font-body);
+    border: none;
+    cursor: pointer;
+    outline: none;
+}
+
+input,
+textarea {
+    font-family: var(--font-body);
+}

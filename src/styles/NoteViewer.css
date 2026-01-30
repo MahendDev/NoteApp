@@ -1,0 +1,136 @@
+.note-viewer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    animation: slideIn 0.2s ease-out;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.viewer-header {
+    padding: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.icon-btn.delete {
+    color: #ff6b6b;
+}
+
+.viewer-body {
+    padding: 24px;
+    padding-top: 0;
+    flex: 1;
+}
+
+.viewer-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+    opacity: 0.6;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.viewer-category {
+    background: rgba(0, 0, 0, 0.05);
+    padding: 4px 12px;
+    border-radius: 12px;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 0.5px;
+}
+
+.viewer-title {
+    font-size: 2.0rem;
+    /* Reduced from 2.5rem */
+    font-weight: 800;
+    color: var(--text-main);
+    margin-bottom: 24px;
+    line-height: 1.2;
+}
+
+.viewer-content {
+    font-size: 1.2rem;
+    color: var(--text-main);
+    line-height: 1.6;
+    white-space: pre-wrap;
+}
+
+/* Checklist Viewer Styles */
+.viewer-checklist {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.viewer-check-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 12px;
+    background: rgba(255, 255, 255, 0.4);
+    border-radius: 16px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.viewer-check-item:active {
+    transform: scale(0.98);
+    background: rgba(255, 255, 255, 0.6);
+}
+
+.viewer-check-item.done {
+    opacity: 0.6;
+}
+
+.viewer-check-item.done .check-text {
+    text-decoration: line-through;
+}
+
+.custom-checkbox {
+    width: 24px;
+    height: 24px;
+    border-radius: 8px;
+    border: 2px solid var(--text-main);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    color: white;
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+.custom-checkbox.checked {
+    background: var(--text-main);
+}
+
+.check-text {
+    font-size: 1.15rem;
+    color: var(--text-main);
+    line-height: 1.5;
+}

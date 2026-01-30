@@ -1,0 +1,175 @@
+.note-card {
+    padding: 16px;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    position: relative;
+    transition: transform 0.2s, box-shadow 0.2s;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* Center content */
+    height: 180px;
+    /* Fixed height! */
+    width: 100%;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    overflow: hidden;
+    text-align: center;
+}
+
+.note-header-row {
+    margin-bottom: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding-right: 0px;
+    align-items: center;
+    /* Center children */
+    justify-content: center;
+    width: 100%;
+}
+
+.note-title {
+    font-weight: 800;
+    color: var(--text-main);
+    line-height: 1.25;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    word-break: normal;
+    overflow-wrap: break-word;
+    hyphens: auto;
+    width: 100%;
+    margin: 0;
+    text-align: center;
+    /* Explicit center */
+}
+
+.note-title.large {
+    font-size: 1.3rem;
+    -webkit-line-clamp: 2;
+}
+
+.note-title.medium {
+    font-size: 1.1rem;
+    -webkit-line-clamp: 3;
+}
+
+.note-title.small {
+    font-size: 0.95rem;
+    -webkit-line-clamp: 4;
+}
+
+.note-date {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    order: -1;
+    opacity: 0.8;
+}
+
+.note-category {
+    font-size: 0.65rem;
+    background: rgba(255, 255, 255, 0.6);
+    padding: 4px 12px;
+    border-radius: 20px;
+    color: var(--text-muted);
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    display: inline-block;
+}
+
+/* Actions group */
+.card-actions {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    display: flex;
+    gap: 8px;
+    opacity: 0;
+    transition: opacity 0.2s;
+    z-index: 10;
+}
+
+.note-card:hover .card-actions,
+.card-actions:focus-within {
+    opacity: 1;
+}
+
+@media (hover: none) {
+    .card-actions {
+        opacity: 1;
+    }
+}
+
+.action-btn {
+    background: white;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-muted);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    transition: all 0.2s;
+    border: none;
+    cursor: pointer;
+}
+
+.action-btn:hover {
+    transform: scale(1.1);
+}
+
+.action-btn.edit:hover {
+    color: var(--text-main);
+    background: #f0f0f0;
+}
+
+.action-btn.delete:hover {
+    color: white;
+    background: #ff6b6b;
+}
+
+.note-checklist-preview {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin-top: 8px;
+    margin-bottom: 8px;
+}
+
+.preview-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.9rem;
+    color: var(--text-main);
+    opacity: 0.8;
+}
+
+.custom-check {
+    width: 14px;
+    height: 14px;
+    border: 2px solid var(--text-muted);
+    border-radius: 4px;
+    display: inline-block;
+}
+
+.preview-text {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.more-items {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-top: 4px;
+    font-weight: 600;
+}

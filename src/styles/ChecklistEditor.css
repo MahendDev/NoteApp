@@ -1,0 +1,64 @@
+.type-toggle {
+    margin-right: auto;
+    margin-left: 16px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    background: rgba(0, 0, 0, 0.05);
+    padding: 6px 12px;
+    border-radius: 12px;
+}
+
+.checklist-container {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.checklist-item-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    animation: fadeIn 0.2s ease-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(5px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.checklist-checkbox {
+    width: 20px;
+    height: 20px;
+    border-radius: 6px;
+    border: 2px solid var(--text-muted);
+    appearance: none;
+    -webkit-appearance: none;
+}
+
+.checklist-input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    font-size: 1.1rem;
+    color: var(--text-main);
+    outline: none;
+    padding: 4px 0;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.2s;
+}
+
+.checklist-input:focus {
+    border-bottom-color: rgba(0, 0, 0, 0.1);
+}
+
+.checklist-input::placeholder {
+    color: rgba(0, 0, 0, 0.2);
+}
