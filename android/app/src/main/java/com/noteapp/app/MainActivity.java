@@ -8,22 +8,26 @@ public class MainActivity extends BridgeActivity {
     
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+        // Register plugin before super.onCreate()
         registerPlugin(PinShortcutPlugin.class);
-        handleIntent(getIntent());
+        super.onCreate(savedInstanceState);
+        handleShortcutIntent(getIntent());
     }
 
     @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
-        handleIntent(intent);
+        setIntent(intent);
+        handleShortcutIntent(intent);
     }
 
-    private void handleIntent(Intent intent) {
+    private void handleShortcutIntent(Intent intent) {
         if (intent != null && intent.hasExtra("noteId")) {
             String noteId = intent.getStringExtra("noteId");
-            // Send noteId to the web app via JavaScript bridge
-            this.getBridge().triggerJSEvent("noteShortcutOpened", "{\"noteId\":\"" + noteId + "\"}");
+            if (noteId != null && getBridge() != null) {
+                // Trigger event to web layer
+                getBridge().triggerWindowJSEvent("noteShortcutOpened", "{\"noteId\":\"" + noteId + "\"}");
+            }
         }
     }
 }

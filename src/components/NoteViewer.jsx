@@ -22,14 +22,20 @@ export default function NoteViewer({ note, onClose, onEdit, onDelete, onUpdate, 
 
     const pinToHome = async () => {
         try {
-            await PinShortcut.pinNote({
+            const result = await PinShortcut.pinNote({
                 noteId: note.id,
                 noteTitle: note.title
             });
-            alert(`"${note.title}" pinned to home screen! 📌`);
+
+            if (result.success) {
+                alert(`"${note.title}" pinned to home screen! 📌`);
+            } else {
+                alert('Failed to create shortcut. Please try again.');
+            }
         } catch (error) {
-            console.error('Failed to pin note:', error);
-            alert('Failed to pin note. This feature requires Android 8.0+');
+            console.error('Pin error:', error);
+            // Show actual error message for debugging
+            alert(`Error: ${error.message || 'Unknown error'}\n\nPlease check if the app has permission to create shortcuts.`);
         }
     };
 
