@@ -43,13 +43,14 @@ function App() {
 
     const updateShortcuts = async () => {
         try {
-            const recentNotes = getNotes().slice(0, 4).map(n => ({
+            // Get pinned notes only (max 4)
+            const pinnedNotes = getNotes().filter(n => n.isPinned).slice(0, 4).map(n => ({
                 id: n.id,
                 title: n.title
             }));
-            if (recentNotes.length > 0) {
-                await AppShortcuts.setShortcuts({ notes: recentNotes });
-            }
+
+            // Set shortcuts (if empty, this will clear them)
+            await AppShortcuts.setShortcuts({ notes: pinnedNotes });
         } catch (error) {
             console.error('Failed to update shortcuts:', error);
         }
