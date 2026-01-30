@@ -1,14 +1,14 @@
 import { registerPlugin } from '@capacitor/core';
-import type { PinShortcutPlugin } from './pinShortcut';
+import type { AppShortcutsPlugin } from './appShortcuts';
 
-const PinShortcut = registerPlugin<PinShortcutPlugin>('PinShortcut', {
+const AppShortcuts = registerPlugin<AppShortcutsPlugin>('AppShortcuts', {
     web: {
-        pinNote: async () => {
-            console.warn('Pin shortcut not supported on web');
-            return { success: false };
+        setShortcuts: async () => {
+            console.warn('App shortcuts not supported on web');
+            return { success: false, count: 0 };
         },
     },
 });
 
-export default PinShortcut;
-export * from './pinShortcut';
+export default AppShortcuts;
+export * from './appShortcuts';

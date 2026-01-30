@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import { ArrowLeft, Pencil, Trash2, Scissors, Pin } from 'lucide-react';
-import PinShortcut from '../plugins';
+import { ArrowLeft, Pencil, Trash2, Scissors } from 'lucide-react';
 import '../styles/NoteViewer.css';
 import '../styles/ChecklistEditor.css'; // Reuse checklist styles
 
@@ -20,25 +19,6 @@ export default function NoteViewer({ note, onClose, onEdit, onDelete, onUpdate, 
         onUpdate({ ...note, checklist: newChecklist });
     };
 
-    const pinToHome = async () => {
-        try {
-            const result = await PinShortcut.pinNote({
-                noteId: note.id,
-                noteTitle: note.title
-            });
-
-            if (result.success) {
-                alert(`"${note.title}" pinned to home screen! 📌`);
-            } else {
-                alert('Failed to create shortcut. Please try again.');
-            }
-        } catch (error) {
-            console.error('Pin error:', error);
-            // Show actual error message for debugging
-            alert(`Error: ${error.message || 'Unknown error'}\n\nPlease check if the app has permission to create shortcuts.`);
-        }
-    };
-
     const date = new Date(note.date).toLocaleDateString('en-US', {
         weekday: 'long',
         year: 'numeric',
@@ -53,9 +33,6 @@ export default function NoteViewer({ note, onClose, onEdit, onDelete, onUpdate, 
                     <ArrowLeft size={24} />
                 </button>
                 <div className="header-actions">
-                    <button onClick={pinToHome} className="icon-btn" title="Pin to home screen">
-                        <Pin size={24} />
-                    </button>
                     {note.type === 'checklist' && (
                         <button onClick={() => onSplit(note)} className="icon-btn" title="Move unchecked to new note">
                             <Scissors size={24} />

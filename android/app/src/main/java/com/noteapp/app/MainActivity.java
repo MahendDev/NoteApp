@@ -9,7 +9,7 @@ public class MainActivity extends BridgeActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         // Register plugin before super.onCreate()
-        registerPlugin(PinShortcutPlugin.class);
+        registerPlugin(AppShortcutsPlugin.class);
         super.onCreate(savedInstanceState);
         handleShortcutIntent(getIntent());
     }

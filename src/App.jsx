@@ -4,6 +4,7 @@ import NoteList from './components/NoteList';
 import NoteEditor from './components/NoteEditor';
 import NoteViewer from './components/NoteViewer';
 import { getNotes, saveNote, deleteNote, updateNote } from './lib/storage';
+import AppShortcuts from './plugins';
 import './styles/global.css';
 import './styles/App.css';
 
@@ -30,6 +31,21 @@ function App() {
     const handleViewNote = (note) => {
         setViewingNote(note);
         setIsEditing(false);
+        updateShortcuts();
+    };
+
+    const updateShortcuts = async () => {
+        try {
+            const recentNotes = getNotes().slice(0, 4).map(n => ({
+                id: n.id,
+                title: n.title
+            }));
+            if (recentNotes.length > 0) {
+                await AppShortcuts.setShortcuts({ notes: recentNotes });
+            }
+        } catch (error) {
+            console.error('Failed to update shortcuts:', error);
+        }
     };
 
     const handleEditNote = (note) => {
