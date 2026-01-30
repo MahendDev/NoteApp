@@ -63,19 +63,21 @@ function App() {
     };
 
     const handleSaveNote = (note) => {
-        let updatedNotes;
+
         if (note.id) {
-            updatedNotes = updateNote(note);
-            setNotes(updatedNotes);
+            updateNote(note);
             // If we were viewing a note, update the view as well
             if (viewingNote?.id === note.id) {
                 setViewingNote(note);
             }
         } else {
-            const newNote = saveNote(note);
-            updatedNotes = [newNote, ...notes];
-            setNotes(updatedNotes);
+            saveNote(note);
         }
+
+        // Refresh notes from storage to apply sorting (Pinned first)
+        setNotes(getNotes());
+
+        setIsEditing(false);
         setIsEditing(false);
         // If we came from view mode, return to view mode (updated note)
         // If it was a new note, maybe go to list. Let's default to list for now unless we want to view the new note.
@@ -132,17 +134,11 @@ function App() {
             color: originalNote.color,
             category: originalNote.category
         };
-        const savedNewNote = saveNote(newNote);
+        saveNote(newNote);
 
         // 3. Update state
-        // We need to re-fetch or construct the new state properly
-        // updateNote returns valid notes array, but we need to prepend the new one
-        const finalNotes = [savedNewNote, ...updatedNotes.filter(n => n.id !== updatedOriginal.id), updatedOriginal];
-        // Sort by date usually? actually getNotes() sorts. 
-        // Let's just use getNotes() to be safe or simplest modification.
-        // Actually, let's just use the returned array from updateNote + manually add new one
-
-        setNotes([savedNewNote, ...updatedNotes]);
+        // Refresh notes from storage to apply sorting (Pinned first)
+        setNotes(getNotes());
         setViewingNote(null); // Close viewer as we modified the note significantly
     };
 
