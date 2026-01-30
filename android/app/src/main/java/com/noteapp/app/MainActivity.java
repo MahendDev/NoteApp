@@ -24,9 +24,13 @@ public class MainActivity extends BridgeActivity {
     private void handleShortcutIntent(Intent intent) {
         if (intent != null && intent.hasExtra("noteId")) {
             String noteId = intent.getStringExtra("noteId");
-            if (noteId != null && getBridge() != null) {
-                // Trigger event to web layer
-                getBridge().triggerWindowJSEvent("noteShortcutOpened", "{\"noteId\":\"" + noteId + "\"}");
+            if (noteId != null) {
+                // Try to trigger immediately or retry if bridge/webview not ready
+                new android.os.Handler().postDelayed(() -> {
+                    if (getBridge() != null && getBridge().getWebView() != null) {
+                         getBridge().triggerWindowJSEvent("noteShortcutOpened", "{\"noteId\":\"" + noteId + "\"}");
+                    }
+                }, 1500); // 1.5s delay to allow React to load
             }
         }
     }

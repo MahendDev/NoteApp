@@ -34,20 +34,31 @@ function App() {
         const handleShortcut = (event) => {
             try {
                 // Parse the data from the event
-                const data = typeof event.detail === 'string' ? JSON.parse(event.detail) : event.detail;
-                const noteId = data.noteId;
+                console.log('Received shortcut event:', event.detail);
+                let noteId;
+                if (typeof event.detail === 'string') {
+                    try {
+                        const parsed = JSON.parse(event.detail);
+                        noteId = parsed.noteId;
+                    } catch (e) {
+                        // maybe it's just the ID string?
+                        noteId = event.detail;
+                    }
+                } else if (event.detail && event.detail.noteId) {
+                    noteId = event.detail.noteId;
+                }
 
                 if (noteId) {
-                    const allNotes = getNotes();
-                    const targetNote = allNotes.find(n => n.id === noteId);
-                    if (targetNote) {
-                        // Small delay to ensure state is ready
-                        setTimeout(() => {
+                    // Small delay to ensure notes are loaded
+                    setTimeout(() => {
+                        const allNotes = getNotes();
+                        const targetNote = allNotes.find(n => n.id === noteId);
+                        if (targetNote) {
                             setViewingNote(targetNote);
                             setIsEditing(false);
                             setCurrentNote(null);
-                        }, 100);
-                    }
+                        }
+                    }, 500);
                 }
             } catch (error) {
                 console.error('Failed to handle shortcut:', error);
