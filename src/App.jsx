@@ -94,8 +94,14 @@ function App() {
         const updatedNotes = updateNote(updatedOriginal);
 
         // 2. Create new note (with unchecked)
+        // Remove existing "(Remaining)" suffix if present to avoid duplication
+        let baseTitle = originalNote.title;
+        if (baseTitle.endsWith(' (Remaining)')) {
+            baseTitle = baseTitle.replace(/ \(Remaining\)$/, '');
+        }
+
         const newNote = {
-            title: `${originalNote.title} (Remaining)`,
+            title: `${baseTitle} (Remaining)`,
             content: '',
             type: 'checklist',
             checklist: uncheckedItems,
