@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ArrowLeft, Pencil, Trash2, Scissors } from 'lucide-react';
+import { ArrowLeft, Pencil, Trash2, Scissors, Pin, PinOff } from 'lucide-react';
 import '../styles/NoteViewer.css';
 import '../styles/ChecklistEditor.css'; // Reuse checklist styles
 
@@ -19,6 +19,10 @@ export default function NoteViewer({ note, onClose, onEdit, onDelete, onUpdate, 
         onUpdate({ ...note, checklist: newChecklist });
     };
 
+    const togglePin = () => {
+        onUpdate({ ...note, isPinned: !note.isPinned });
+    };
+
     const date = new Date(note.date).toLocaleDateString('en-US', {
         weekday: 'long',
         year: 'numeric',
@@ -33,6 +37,9 @@ export default function NoteViewer({ note, onClose, onEdit, onDelete, onUpdate, 
                     <ArrowLeft size={24} />
                 </button>
                 <div className="header-actions">
+                    <button onClick={togglePin} className={`icon-btn ${note.isPinned ? 'active' : ''}`} title={note.isPinned ? "Unpin note" : "Pin to top"}>
+                        {note.isPinned ? <PinOff size={24} /> : <Pin size={24} />}
+                    </button>
                     {note.type === 'checklist' && (
                         <button onClick={() => onSplit(note)} className="icon-btn" title="Move unchecked to new note">
                             <Scissors size={24} />

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Trash2 } from 'lucide-react';
+import { Trash2, Pin } from 'lucide-react';
 import '../styles/NoteCard.css';
 
 export default function NoteCard({ note, onDelete, onEdit, onView }) {
@@ -21,9 +21,12 @@ export default function NoteCard({ note, onDelete, onEdit, onView }) {
                 <div className="note-header-row">
                     <span className="note-date">{date}</span>
                     <h3 className={`note-title ${getTitleSize(note.title)}`}>{note.title}</h3>
-                    {note.category && (
-                        <span className="note-category">{note.category}</span>
-                    )}
+                    <div style={{ display: 'flex', gap: '4px', alignItems: 'center' }}>
+                        {note.isPinned && <Pin size={14} className="pin-icon" fill="currentColor" />}
+                        {note.category && (
+                            <span className="note-category">{note.category}</span>
+                        )}
+                    </div>
                 </div>
             </div>
 

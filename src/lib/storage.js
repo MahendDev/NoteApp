@@ -4,7 +4,14 @@ const STORAGE_KEY = 'cute_notes_data';
 
 export const getNotes = () => {
     const data = localStorage.getItem(STORAGE_KEY);
-    return data ? JSON.parse(data) : [];
+    const notes = data ? JSON.parse(data) : [];
+    // Sort: Pinned first, then by date (newest first)
+    return notes.sort((a, b) => {
+        if (a.isPinned === b.isPinned) {
+            return new Date(b.date) - new Date(a.date);
+        }
+        return a.isPinned ? -1 : 1;
+    });
 };
 
 export const saveNote = (note) => {
