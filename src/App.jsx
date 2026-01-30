@@ -22,6 +22,13 @@ function App() {
         document.body.className = theme === 'default' ? '' : `theme-${theme}`;
     }, [theme]);
 
+    // Update shortcuts whenever notes list changes
+    useEffect(() => {
+        if (notes.length > 0) {
+            updateShortcuts();
+        }
+    }, [notes]);
+
     const handleAddNote = () => {
         setCurrentNote(null);
         setViewingNote(null);
